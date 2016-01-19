@@ -5,6 +5,7 @@ hapi-crud-promise
 - [Simple Usage](#simple-usage)
 - [Contributing](#contributing)
  - [Pull Request Checklist](#pull-request-checklist)
+- [FAQ](#faq)
 
 <!-- tocstop -->
 
@@ -76,3 +77,9 @@ Checklist for submitting a pull request:
 - [ ] `npm run test-cov` - Code coverage cannot go down
 - [ ] `npm run lint` - New code must have no linter errors
 - [ ] Your pull request must pass CI (when available)
+
+### FAQ
+#### Isn't this like [hapi-crud](https://www.npmjs.com/package/hapi-crud)?
+Yeah, but with [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)! And active.  And the Github repo is still live.
+#### Can't I just create a bunch of routes manually?
+CRUD routes are repetitive. Write less code and go outside.
