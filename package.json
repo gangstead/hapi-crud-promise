@@ -1,0 +1,44 @@
+{
+  "name": "hapi-crud-promise",
+  "version": "0.0.1",
+  "description": "Easily create CRUD routes on a hapi server by providing a path and promises for each of the actions",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "NODE_ENV=test mocha --recursive -R spec",
+    "posttest": "eslint .",
+    "test-cov": "istanbul cover node_modules/.bin/_mocha -- --recursive -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gangstead/hapi-crud-promise.git"
+  },
+  "keywords": [
+    "hapi",
+    "promise",
+    "crud"
+  ],
+  "author": "Gangstead",
+  "license": "MIT",
+  "devDependencies": {
+    "blipp": "^2.3.0",
+    "bluebird": "^3.1.1",
+    "chai": "^3.4.1",
+    "eslint": "^1.10.3",
+    "eslint-config-vinli": "^4.1.0",
+    "eslint-plugin-mocha": "^1.1.0",
+    "hapi": "^12.1.0",
+    "istanbul": "^0.4.2",
+    "joi": "^7.2.1",
+    "mocha": "^2.3.4"
+  },
+  "dependencies": {
+    "lodash": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=4"
+  }
+}
