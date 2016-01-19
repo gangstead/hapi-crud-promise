@@ -2,9 +2,9 @@ hapi-crud-promise
 =================
 <!-- toc -->
 - [Basics](#basics)
-- [Simple Usage](#simpleusage)
+- [Simple Usage](#simple-usage)
 - [Contributing](#contributing)
- - [Pull Request Checklist](#pullrequestchecklist)
+ - [Pull Request Checklist](#pull-request-checklist)
 
 <!-- tocstop -->
 
