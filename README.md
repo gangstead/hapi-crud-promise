@@ -38,6 +38,9 @@ hapiCrudPromise(server, {
   path: '/api/things/{thingId}',
   config: {
     validate: {
+      query: { // validation only applied to GET (all)
+        limit: Joi.number().optional()
+      }
       params: { // validation only applied to GET (one), DELETE, and UPDATE routes
         thingId: Joi.string().required()
       },
