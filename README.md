@@ -1,9 +1,17 @@
 hapi-crud-promise
 =================
+<!-- toc -->
+- [Basics](#basics)
+- [Simple Usage](#simpleusage)
+- [Contributing](#contributing)
+ - [Pull Request Checklist](#pullrequestchecklist)
 
+<!-- tocstop -->
+
+### Basics
 Reduce repetitive route setup for basic CRUD apps.
 
-Simply define one route:
+Provide one route and a 5 handlers:
 ```
 /api/things/{thingId}
 ```
@@ -17,7 +25,7 @@ UPDATE /api/things/{thingId}
 DELETE /api/things/{thingId}
 ```
 
-### Basic Usage
+### Simple Usage
 ```js
 const Hapi = require('hapi');
 const Joi = require('joi');
@@ -55,3 +63,13 @@ hapiCrudPromise(server, {
   }
 });
 ```
+
+### Contributing
+Contributors wanted.  If you are looking for a way to help out browse the [Help Wanted](https://github.com/gangstead/hapi-crud-promise/labels/help%20wanted) issues and find one that looks good to you. If you have an idea to make hap-crud-promise better submit a pull request.
+#### Pull Request Checklist
+Checklist for submitting a pull request:
+- [ ] `npm run test` - Unit tests must pass
+- [ ] New unit tests
+- [ ] `npm run test-cov` - Code coverage cannot go down
+- [ ] `npm run lint` - New code must have no linter errors
+- [ ] Your pull request must pass CI (when available)
