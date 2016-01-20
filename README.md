@@ -24,7 +24,7 @@ And get 5 routes added to your server:
 GET    /api/things
 POST   /api/things
 GET    /api/things/{thingId}
-PUT /api/things/{thingId}
+PUT    /api/things/{thingId}
 DELETE /api/things/{thingId}
 ```
 
