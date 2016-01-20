@@ -102,7 +102,7 @@ describe('hapi-crud-promise', () => {
 
   it('should create an UPDATE route', () => {
     return inject(server, {
-      method: 'UPDATE',
+      method: 'PUT',
       url: {
         pathname: `/api/things/${thingId}`,
       }

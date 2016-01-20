@@ -43,7 +43,7 @@ module.exports = (server, options) => {
   });
 
   server.route({
-    method: 'UPDATE',
+    method: 'PUT',
     path: options.path,
     config: {
       validate: {
