@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "test": "NODE_ENV=test mocha --recursive -R spec",
     "posttest": "eslint .",
-    "test-cov": "istanbul cover node_modules/.bin/_mocha -- --recursive -R spec"
+    "test-cov": "istanbul cover node_modules/.bin/_mocha -- --recursive -R spec",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "bluebird": "^3.1.1",
     "chai": "^3.4.1",
+    "coveralls": "^2.11.6",
     "eslint": "^1.10.3",
     "eslint-config-vinli": "^4.1.0",
     "eslint-plugin-mocha": "^1.1.0",
