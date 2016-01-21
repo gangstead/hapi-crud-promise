@@ -105,6 +105,9 @@ describe('hapi-crud-promise', () => {
       method: 'PUT',
       url: {
         pathname: `/api/things/${thingId}`,
+      },
+      payload: {
+        name: 'thingamaput'
       }
     }).then((resp) => {
       expect(resp).to.have.property('statusCode', 200);

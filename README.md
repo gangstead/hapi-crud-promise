@@ -47,25 +47,40 @@ hapiCrudPromise(server, {
       params: { // validation only applied to GET (one), DELETE, and UPDATE routes
         thingId: Joi.string().required()
       },
-      payload: Joi.object({ // validation only applied to POST route
-        name: Joi.string().required()
+      payload: Joi.object({ // validation only applied to POST and PUT route
+        thing: Joi.object({
+          name: Joi.string().required()
+        }).required()
       })
     }
   },
   crudRead(req) {
-    return /* a promise */
+    return knex('things')
+      .first()
+      .where({ id: req.params.thingId });
   },
   crudReadAll(req) {
-    return /* a promise */
+    return knex('things').limit(req.query.limit);
   },
   crudUpdate(req) {
-    return /* a promise */
+    return knex('things')
+      .update(req.payload.thing)
+      .where({ id: req.params.thingId })
+      .limit(1)
+      .returning('*')
+      .spread((thing) => ({ thing: thing }));
   },
   crudCreate(req) {
-    return /* a promise */
+    return knex('things')
+      .insert(req.payload.thing)
+      .returning('*')
+      .spread((thing) => ({ thing: thing }));
   },
   crudDelete(req) {
-    return /* a promise */
+    return knex('things')
+      .delete()
+      .where({ id: req.params.thingId })
+      .limit(1);
   }
 });
 ```

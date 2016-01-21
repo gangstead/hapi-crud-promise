@@ -47,7 +47,8 @@ module.exports = (server, options) => {
     path: options.path,
     config: {
       validate: {
-        params: options.config.validate.params
+        params: options.config.validate.params,
+        payload: options.config.validate.payload
       }
     },
     handler: function(req, reply) {
