@@ -1,9 +1,25 @@
 'use strict';
+const _ = require('lodash');
 
 module.exports = (server, options) => {
   const reallAllPost = options.path.slice(0, options.path.lastIndexOf('/'))
 
-  server.route({
+  let baseOpts = _.omit(options, [
+    'method',
+    'path',
+    'handler',
+    'crudReadAll',
+    'crudCreate',
+    'crudRead',
+    'crudUpdate',
+    'crudDelete'
+  ]);
+
+  _.unset(baseOpts, 'config.validate.params');
+  _.unset(baseOpts, 'config.validate.payload');
+  _.unset(baseOpts, 'config.validate.query');
+
+  server.route(_.merge(baseOpts, {
     method: 'GET',
     path: reallAllPost,
     config: {
@@ -14,9 +30,9 @@ module.exports = (server, options) => {
     handler: function(req, reply) {
       reply(options.crudReadAll(req));
     }
-  });
+  }));
 
-  server.route({
+  server.route(_.merge(baseOpts, {
     method: 'POST',
     path: reallAllPost,
     config: {
@@ -27,9 +43,9 @@ module.exports = (server, options) => {
     handler: function(req, reply) {
       reply(options.crudCreate(req)).code(201);
     }
-  });
+  }));
 
-  server.route({
+  server.route(_.merge(baseOpts, {
     method: 'GET',
     path: options.path,
     config: {
@@ -40,9 +56,9 @@ module.exports = (server, options) => {
     handler: function(req, reply) {
       reply(options.crudRead(req));
     }
-  });
+  }));
 
-  server.route({
+  server.route(_.merge(baseOpts, {
     method: 'PUT',
     path: options.path,
     config: {
@@ -54,9 +70,9 @@ module.exports = (server, options) => {
     handler: function(req, reply) {
       reply(options.crudUpdate(req));
     }
-  });
+  }));
 
-  server.route({
+  server.route(_.merge(baseOpts, {
     method: 'DELETE',
     path: options.path,
     config: {
@@ -67,5 +83,5 @@ module.exports = (server, options) => {
     handler: function(req, reply) {
       reply(options.crudDelete(req)).code(204);
     }
-  });
+  }));
 }
