@@ -1,6 +1,6 @@
 hapi-crud-promise [![Build Status](https://travis-ci.org/gangstead/hapi-crud-promise.svg?branch=master)](https://travis-ci.org/gangstead/hapi-crud-promise) [![Coverage Status](https://coveralls.io/repos/github/gangstead/hapi-crud-promise/badge.svg?branch=master)](https://coveralls.io/github/gangstead/hapi-crud-promise?branch=master)
 ==========================
-[![NPM](https://nodei.co/npm/hap-crud-promise.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/hapi-crud-promise/) [![NPM](https://nodei.co/npm-dl/hap-crud-promise.png?months=3&height=3)](https://nodei.co/npm/hapi-crud-promise/)
+[![NPM](https://nodei.co/npm/hapi-crud-promise.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/hapi-crud-promise/) [![NPM](https://nodei.co/npm-dl/hapi-crud-promise.png?months=3&height=3)](https://nodei.co/npm/hapi-crud-promise/)
 
 <!-- toc -->
 - [Basics](#basics)
@@ -86,7 +86,7 @@ hapiCrudPromise(server, {
 ```
 
 ### Contributing
-Contributors wanted.  If you are looking for a way to help out browse the [Help Wanted](https://github.com/gangstead/hapi-crud-promise/labels/help%20wanted) issues and find one that looks good to you. If you have an idea to make hap-crud-promise better submit a pull request.
+Contributors wanted.  If you are looking for a way to help out browse the [Help Wanted](https://github.com/gangstead/hapi-crud-promise/labels/help%20wanted) issues and find one that looks good to you. If you have an idea to make hapi-crud-promise better submit a pull request.
 #### Pull Request Checklist
 Checklist for submitting a pull request:
 - [ ] `npm run test` - Unit tests must pass
