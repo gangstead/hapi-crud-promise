@@ -137,7 +137,7 @@ describe('hapi-crud-promise', () => {
     });
   });
 
-  it('should pass along other options to server', () => {
+  it.only('should pass along other options to server', () => {
     server.register(require('hapi-auth-basic'))
     server.auth.strategy('simple', 'basic', { validateFunc: (() => {true}) });
     hapiCrudPromise(server, {

@@ -4,7 +4,7 @@ const _ = require('lodash');
 module.exports = (server, options) => {
   const reallAllPost = options.path.slice(0, options.path.lastIndexOf('/'))
 
-  let baseOpts = _.omit(options, [
+  let baseOpts = _.omit(_.cloneDeep(options), [
     'method',
     'path',
     'handler',
