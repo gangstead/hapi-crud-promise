@@ -1,6 +1,6 @@
 {
   "name": "hapi-crud-promise",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Easily create CRUD routes on a hapi server by providing a path and promises for each of the actions",
   "main": "index.js",
   "directories": {
