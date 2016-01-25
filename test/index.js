@@ -149,13 +149,13 @@ describe('hapi-crud-promise', () => {
             accept: Joi.string().default('swg')
           },
           query: {
-            swg: Joi.string().required()
+            thingId: Joi.string().required()
           },
           params: {
-            swg: Joi.string().required()
+            thingId: Joi.string().required()
           },
           payload: Joi.object({
-            swg: Joi.string().required()
+            name: Joi.string().required()
           })
         }
       },
@@ -193,5 +193,78 @@ describe('hapi-crud-promise', () => {
     const aRoute = server.table()[0].table[0];
     expect(aRoute).to.have.deep.property('settings.auth.strategies[0]', 'simple');
     expect(aRoute).to.have.deep.property('settings.validate.headers');
+  });
+
+  describe('should only create routes for handlers provided', () => {
+    it('part 1', () => {
+      hapiCrudPromise(server, {
+        path: '/api/things/{thingId}',
+        config: {
+          validate: {
+            params: {
+              thingId: Joi.string().required()
+            },
+            payload: Joi.object({
+              name: Joi.string().required()
+            })
+          }
+        },
+        crudRead(req) {
+          return B.resolve({
+            id: 1,
+            name: 'thingamajig'
+          });
+        },
+        crudCreate(req) {
+          return B.resolve({
+            id: 1,
+            name: 'thingamajig'
+          });
+        }
+      });
+
+      const routes = server.table()[0].table;
+      expect(routes).to.have.deep.property('length', 2);
+    });
+
+    it('part 2', () => {
+      hapiCrudPromise(server, {
+        path: '/api/things/{thingId}',
+        config: {
+          validate: {
+            query: {
+              thingId: Joi.string().required()
+            },
+            params: {
+              thingId: Joi.string().required()
+            },
+            payload: Joi.object({
+              name: Joi.string().required()
+            })
+          }
+        },
+        crudReadAll(req) {
+          return B.resolve({
+            things: [
+              { id: 1, name: 'thingamajig' },
+              { id: 2, name: 'thingamabob' }
+            ]
+          });
+        },
+        crudUpdate(req) {
+          return B.resolve({
+            id: 1,
+            name: 'thinger'
+          });
+        },
+        crudDelete(req) {
+          return B.resolve();
+        }
+      });
+
+      const routes = server.table()[0].table;
+      expect(routes).to.have.deep.property('length', 3);
+    })
+
   });
 });

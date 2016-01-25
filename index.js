@@ -19,69 +19,79 @@ module.exports = (server, options) => {
   _.unset(baseOpts, 'config.validate.payload');
   _.unset(baseOpts, 'config.validate.query');
 
-  server.route(_.merge(baseOpts, {
-    method: 'GET',
-    path: reallAllPost,
-    config: {
-      validate: {
-        query: options.config.validate.query
+  if(options.crudReadAll) {
+    server.route(_.merge(baseOpts, {
+      method: 'GET',
+      path: reallAllPost,
+      config: {
+        validate: {
+          query: _.get(options, 'config.validate.query')
+        }
+      },
+      handler: function(req, reply) {
+        reply(options.crudReadAll(req));
       }
-    },
-    handler: function(req, reply) {
-      reply(options.crudReadAll(req));
-    }
-  }));
+    }));
+  }
 
-  server.route(_.merge(baseOpts, {
-    method: 'POST',
-    path: reallAllPost,
-    config: {
-      validate: {
-        payload: options.config.validate.payload
+  if(options.crudCreate) {
+    server.route(_.merge(baseOpts, {
+      method: 'POST',
+      path: reallAllPost,
+      config: {
+        validate: {
+          payload: _.get(options, 'config.validate.payload')
+        }
+      },
+      handler: function(req, reply) {
+        reply(options.crudCreate(req)).code(201);
       }
-    },
-    handler: function(req, reply) {
-      reply(options.crudCreate(req)).code(201);
-    }
-  }));
+    }));
+  }
 
-  server.route(_.merge(baseOpts, {
-    method: 'GET',
-    path: options.path,
-    config: {
-      validate: {
-        params: options.config.validate.params
+  if(options.crudRead) {
+    server.route(_.merge(baseOpts, {
+      method: 'GET',
+      path: options.path,
+      config: {
+        validate: {
+          params: _.get(options, 'config.validate.params')
+        }
+      },
+      handler: function(req, reply) {
+        reply(options.crudRead(req));
       }
-    },
-    handler: function(req, reply) {
-      reply(options.crudRead(req));
-    }
-  }));
+    }));
+  }
 
-  server.route(_.merge(baseOpts, {
-    method: 'PUT',
-    path: options.path,
-    config: {
-      validate: {
-        params: options.config.validate.params,
-        payload: options.config.validate.payload
+  if(options.crudUpdate) {
+    server.route(_.merge(baseOpts, {
+      method: 'PUT',
+      path: options.path,
+      config: {
+        validate: {
+          params: _.get(options, 'config.validate.params'),
+          payload: _.get(options, 'config.validate.payload')
+        }
+      },
+      handler: function(req, reply) {
+        reply(options.crudUpdate(req));
       }
-    },
-    handler: function(req, reply) {
-      reply(options.crudUpdate(req));
-    }
-  }));
+    }));
+  }
 
-  server.route(_.merge(baseOpts, {
-    method: 'DELETE',
-    path: options.path,
-    config: {
-      validate: {
-        params: options.config.validate.params
+  if(options.crudDelete) {
+    server.route(_.merge(baseOpts, {
+      method: 'DELETE',
+      path: options.path,
+      config: {
+        validate: {
+          params: _.get(options, 'config.validate.params')
+        }
+      },
+      handler: function(req, reply) {
+        reply(options.crudDelete(req)).code(204);
       }
-    },
-    handler: function(req, reply) {
-      reply(options.crudDelete(req)).code(204);
-    }
-  }));
+    }));
+  }
 }
