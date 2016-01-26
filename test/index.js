@@ -26,7 +26,7 @@ describe('hapi-crud-promise', () => {
         config: {
           validate: {
             query: {
-              thingId: Joi.string().required()
+              limit: Joi.string().optional()
             },
             params: {
               thingId: Joi.string().required()
@@ -137,7 +137,7 @@ describe('hapi-crud-promise', () => {
     });
   });
 
-  it.only('should pass along other options to server', () => {
+  it('should pass along other options to server', () => {
     server.register(require('hapi-auth-basic'))
     server.auth.strategy('simple', 'basic', { validateFunc: (() => {true}) });
     hapiCrudPromise(server, {

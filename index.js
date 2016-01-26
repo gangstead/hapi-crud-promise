@@ -2,7 +2,7 @@
 const _ = require('lodash');
 
 module.exports = (server, options) => {
-  const reallAllPost = options.path.slice(0, options.path.lastIndexOf('/'))
+  const readAllPost = options.path.slice(0, options.path.lastIndexOf('/'))
 
   let baseOpts = _.omit(_.cloneDeep(options), [
     'method',
@@ -20,9 +20,9 @@ module.exports = (server, options) => {
   _.unset(baseOpts, 'config.validate.query');
 
   if(options.crudReadAll) {
-    server.route(_.merge(baseOpts, {
+    const readAll = _.merge(_.cloneDeep(baseOpts), {
       method: 'GET',
-      path: reallAllPost,
+      path: readAllPost,
       config: {
         validate: {
           query: _.get(options, 'config.validate.query')
@@ -31,13 +31,14 @@ module.exports = (server, options) => {
       handler: function(req, reply) {
         reply(options.crudReadAll(req));
       }
-    }));
+    });
+    server.route(readAll);
   }
 
   if(options.crudCreate) {
-    server.route(_.merge(baseOpts, {
+    const create = _.merge(_.cloneDeep(baseOpts), {
       method: 'POST',
-      path: reallAllPost,
+      path: readAllPost,
       config: {
         validate: {
           payload: _.get(options, 'config.validate.payload')
@@ -46,11 +47,12 @@ module.exports = (server, options) => {
       handler: function(req, reply) {
         reply(options.crudCreate(req)).code(201);
       }
-    }));
+    });
+    server.route(create);
   }
 
   if(options.crudRead) {
-    server.route(_.merge(baseOpts, {
+    const read = _.merge(_.cloneDeep(baseOpts), {
       method: 'GET',
       path: options.path,
       config: {
@@ -61,11 +63,12 @@ module.exports = (server, options) => {
       handler: function(req, reply) {
         reply(options.crudRead(req));
       }
-    }));
+    });
+    server.route(read);
   }
 
   if(options.crudUpdate) {
-    server.route(_.merge(baseOpts, {
+    const update = _.merge(_.cloneDeep(baseOpts), {
       method: 'PUT',
       path: options.path,
       config: {
@@ -77,11 +80,12 @@ module.exports = (server, options) => {
       handler: function(req, reply) {
         reply(options.crudUpdate(req));
       }
-    }));
+    });
+    server.route(update);
   }
 
   if(options.crudDelete) {
-    server.route(_.merge(baseOpts, {
+    const del = _.merge(_.cloneDeep(baseOpts), {
       method: 'DELETE',
       path: options.path,
       config: {
@@ -92,6 +96,7 @@ module.exports = (server, options) => {
       handler: function(req, reply) {
         reply(options.crudDelete(req)).code(204);
       }
-    }));
+    });
+    server.route(del);
   }
 }
