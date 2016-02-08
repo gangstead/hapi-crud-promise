@@ -93,7 +93,7 @@ Checklist for submitting a pull request:
 - [ ] New unit tests
 - [ ] `npm run test-cov` - Code coverage cannot go down
 - [ ] `npm run lint` - New code must have no linter errors
-- [ ] Your pull request must pass CI (when available)
+- [ ] Your pull request must pass CI
 
 ### FAQ
 #### Isn't this like [hapi-crud](https://www.npmjs.com/package/hapi-crud)?
