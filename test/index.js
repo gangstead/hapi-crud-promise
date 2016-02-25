@@ -269,7 +269,7 @@ describe('hapi-crud-promise', () => {
     });
   });
 
-  xdescribe('with multiple path params', () => {
+  describe('with multiple path params', () => {
     beforeEach(() => {
       hapiCrudPromise(server, {
         path: '/api/users/{userId}/things/{thingId}',

@@ -85,6 +85,53 @@ hapiCrudPromise(server, {
 });
 ```
 
+### Slightly-more-advanced Usage
+
+If you have a long path in your route with multiple parameters the last one is special, it identifies the resource you are CRUD-ing and will only be included on validations for GET (one), DELETE, and UPDATE routes
+```js
+const Hapi = require('hapi');
+const Joi = require('joi');
+const hapiCrudPromise = require('../index');
+
+const server = new Hapi.Server();
+server.connection({ host: '127.0.0.1' });
+
+hapiCrudPromise(server, {
+  path: '/api/users/{userId}/things/{thingId}',
+  config: {
+    validate: {
+      query: { // validation only applied to GET (all)
+        limit: Joi.number().optional()
+      }
+      params: {
+        userId: Joi.string().required(), // This and other param validations applied to all routes
+        thingId: Joi.string().required() // Except this one! only applied to GET (one), DELETE, and UPDATE routes
+      },
+      payload: Joi.object({ // validation only applied to POST and PUT route
+        thing: Joi.object({
+          name: Joi.string().required()
+        }).required()
+      })
+    }
+  },
+  crudRead(req) {
+    ...
+  },
+  crudReadAll(req) {
+    ...
+  },
+  crudUpdate(req) {
+    ...
+  },
+  crudCreate(req) {
+    ...
+  },
+  crudDelete(req) {
+    ...
+  }
+});
+```
+
 ### Contributing
 Contributors wanted.  If you are looking for a way to help out browse the [Help Wanted](https://github.com/gangstead/hapi-crud-promise/labels/help%20wanted) issues and find one that looks good to you. If you have an idea to make hapi-crud-promise better submit a pull request.
 #### Pull Request Checklist

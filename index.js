@@ -3,6 +3,8 @@ const _ = require('lodash');
 
 module.exports = (server, options) => {
   const readAllPost = options.path.slice(0, options.path.lastIndexOf('/'));
+  const lastParam = _.get(/\{(\w+)\}$/.exec(options.path), 1, null);
+  const paramsCommon = _.omit(options.config.validate.params, lastParam);
 
   const baseOpts = _.omit(_.cloneDeep(options), [
     'method',
@@ -25,6 +27,7 @@ module.exports = (server, options) => {
       path: readAllPost,
       config: {
         validate: {
+          params: paramsCommon,
           query: _.get(options, 'config.validate.query')
         }
       },
@@ -41,6 +44,7 @@ module.exports = (server, options) => {
       path: readAllPost,
       config: {
         validate: {
+          params: paramsCommon,
           payload: _.get(options, 'config.validate.payload')
         }
       },
