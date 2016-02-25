@@ -1,0 +1,3 @@
+extends: "vinli/server/tests"
+rules:
+  no-unused-vars: 1
